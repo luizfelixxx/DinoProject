@@ -53,7 +53,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
-        self.power_up_manager.update(self.score, self.game_speed, self.player)
+        self.power_up_manager.update(self)
 
     def update_score(self):
         self.score += 1
@@ -90,9 +90,9 @@ class Game:
     
     def draw_power_up_time(self):
         if self.player.has_power_up:
-            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 1)
             if time_to_show >= 0:
-                self.draw_text(f"{self.player.type.capitalize()} enabled for{time_to_show} seconds", 15, COLOR_BLACK, 500, 40) 
+                self.draw_text(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds", 15, COLOR_BLACK, 550, 40) 
             else:
                 self.player.has_power_up = False
                 self.player.type = DEFAULT_TYPE

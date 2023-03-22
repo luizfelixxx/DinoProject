@@ -76,3 +76,5 @@ COLOR_WHITE = (255, 255, 255)
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
+HAMMER_TYPE = "hammer"
+HEART_TYPE = 'heart'
