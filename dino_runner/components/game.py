@@ -2,10 +2,10 @@ import pygame
 
 from dino_runner.utils.constants import *
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.components.button import Button # Ideia do Menu_pause
+from dino_runner.components.button import Button 
 from dino_runner.components.obstacles.obstaclesManager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
-from dino_runner.components.cloud import Cloud # nuvens
+from dino_runner.components.cloud import Cloud
 
 
 class Game:
@@ -18,7 +18,7 @@ class Game:
         self.playing = False
         self.running = False
         self.game_speed = 20
-        self.game_paused = False # menu_pause
+        self.game_paused = False 
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.score = 0
@@ -28,10 +28,8 @@ class Game:
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
         self.cloud = Cloud()
-        # Ideia LeardBoard
+    
         self.leaderboard = []
-        
-        # Lista de botões 
         self.leaderboard_button = Button(550, 150, BUTTONS[0], 0.8)
         self.resume_button = Button(550, 250, BUTTONS[1], 0.8) 
         self.quit_button = Button(550, 350, BUTTONS[2], 0.8)
@@ -49,19 +47,19 @@ class Game:
         self.reset_game()
         self.power_up_manager.reset_power_ups()
         while self.playing:
-            if self.game_paused: # menu_pause 
-                self.menu_pause()# 
+            if self.game_paused:
+                self.menu_pause()
             else:
                 self.events()
                 self.update()
                 self.draw()
-        self.score_leaderboard() # Ideia do Leaderboard 
+        self.score_leaderboard()
         
     def events(self):
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN: # Ideia Menu
-                if event.key == pygame.K_ESCAPE: # 
-                    self.game_paused = True # 
+            if event.type == pygame.KEYDOWN: 
+                if event.key == pygame.K_ESCAPE: 
+                    self.game_paused = True 
             
             if event.type == pygame.QUIT:
                 self.playing = False
@@ -88,9 +86,9 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
-        self.draw_power_up_time()#
-        self.draw_speed()#
-        self.draw_menu_pause()#
+        self.draw_power_up_time()
+        self.draw_speed()
+        self.draw_menu_pause()
         self.power_up_manager.draw(self.screen)#
         self.cloud.draw(self.screen)
         pygame.display.update()
@@ -105,11 +103,9 @@ class Game:
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
     
-    # Ideia nenu
     def draw_menu_pause(self):
         self.draw_text("Press Esc to pause", 20, COLOR_BLACK, 120, 580)
-    
-    # Histórico de pontuação 
+     
     def draw_leaderboard(self):
         with open("leader.txt", "r") as arquivo:
             valores = arquivo.readlines()
@@ -138,37 +134,37 @@ class Game:
                 self.player.has_power_up = False
                 self.player.type = DEFAULT_TYPE
     
-    def draw_speed(self): #
+    def draw_speed(self): 
         self.draw_text(f"Game Speed: {self.game_speed}", 20, COLOR_BLACK, 1000, 20)
 
     def draw_score(self):
         self.draw_text(f"Score: {self.score} ", 20, COLOR_BLACK, 1000, 50)
     
-    # Armazenar a pontuação
     def score_leaderboard(self):
-        self.leaderboard.append(self.score) #
-        with open("leader.txt", "a") as arquivo: #
-            for valor in self.leaderboard: #
-                arquivo.write(str(valor) + "\n") #
+        self.leaderboard.append(self.score) 
+        with open("leader.txt", "a") as arquivo: 
+            for valor in self.leaderboard: 
+                arquivo.write(str(valor) + "\n") 
         self.leaderboard = []
        
-    
-    # Ideia Pausar/Menu/Opções
     def handle_events_menu_pause(self):       
-        for event in pygame.event.get(): # 
+        for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 self.game_paused = False
                 self.playing = False
                 self.running = False
 
-    # Ideia Pausar/Menu/Opções 
     def menu_pause(self):
         while self.game_paused: 
-            if self.resume_button.draw(self.screen):
+            self.resume_button.draw(self.screen)
+            self.leaderboard_button.draw(self.screen)
+            self.quit_button.draw(self.screen)
+            
+            if self.resume_button.action():    
                 self.game_paused = False        
-            elif self.leaderboard_button.draw(self.screen):
+            elif self.leaderboard_button.action():
                 self.draw_leaderboard()   
-            elif self.quit_button.draw(self.screen):
+            elif self.quit_button.action():
                 self.game_paused = False
                 self.playing = False     
                 self.running = False

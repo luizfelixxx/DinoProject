@@ -3,8 +3,8 @@ import pygame
 
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.hammer import Hammer
-from dino_runner.components.power_ups.heart import Heart  #
-from dino_runner.utils.constants import HAMMER_TYPE, SHIELD_TYPE, HEART_TYPE #
+from dino_runner.components.power_ups.heart import Heart  
+from dino_runner.utils.constants import HAMMER_TYPE, SHIELD_TYPE, HEART_TYPE 
 
 
 class PowerUpManager:
@@ -13,7 +13,7 @@ class PowerUpManager:
         self.when_appears = 0
 
     def generate_power_up(self, score):
-        list_power_ups = [Hammer(), Shield(), Heart()] #
+        list_power_ups = [Heart(), Hammer(), Shield()] 
         if len(self.power_ups) == 0 and self.when_appears == score:
             self.when_appears += random.randint(200, 300)
             power_up = random.choice(list_power_ups)
@@ -27,7 +27,7 @@ class PowerUpManager:
                 power_up.start_time = pygame.time.get_ticks()
                 self.handle_power_up_collision(power_up, game, game.player)
     
-    def handle_power_up_collision(self, power_up, game, player): # define the method within the class
+    def handle_power_up_collision(self, power_up, game, player):
         power_up.start_time = pygame.time.get_ticks()
         if power_up.type == HAMMER_TYPE:
             player.hammer = True

@@ -1,9 +1,9 @@
 import pygame
-import random #
+import random 
 
-from dino_runner.utils.constants import  SMALL_CACTUS, LARGE_CACTUS, BIRD #
-from dino_runner.components.obstacles.cactus import Cactus, CactusLarge #
-from dino_runner.components.obstacles.bird import Bird #
+from dino_runner.utils.constants import  SMALL_CACTUS, LARGE_CACTUS, BIRD 
+from dino_runner.components.obstacles.cactus import Cactus, CactusLarge 
+from dino_runner.components.obstacles.bird import Bird 
 from dino_runner.utils.constants import HAMMER_TYPE, SHIELD_TYPE, DEATH_SOUND
 
 

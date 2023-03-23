@@ -1,8 +1,8 @@
 import pygame
 import os
 
-pygame.init() # Adicionado 19/03, ideia de som para pontuação
-pygame.mixer.init() # Adicionado 19/03, ideia de som para pontuação
+pygame.init() 
+pygame.mixer.init() 
 
 # Global Constants
 TITLE = "Chrome Dino Runner"
@@ -10,11 +10,11 @@ SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
 FPS = 30
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
-SOUNDS_DIR = os.path.join(os.path.dirname(__file__), "..", "sounds") #
+SOUNDS_DIR = os.path.join(os.path.dirname(__file__), "..", "sounds") 
 
-DEATH_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "death_sound.wav")) #
-SCORE_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "score_sound.wav")) #
-JUMP_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "jump_sound.wav")) #
+DEATH_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "death_sound.wav")) 
+SCORE_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "score_sound.wav")) 
+JUMP_SOUND = pygame.mixer.Sound(os.path.join(SOUNDS_DIR, "jump_sound.wav")) 
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
@@ -96,4 +96,4 @@ BUTTONS = [
 START_LOGO = pygame.image.load(os.path.join(IMG_DIR, 'Other/start_logo.png'))
 
 
-#DINO_DEATH = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png")), #
+
