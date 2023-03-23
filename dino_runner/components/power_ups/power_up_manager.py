@@ -25,25 +25,29 @@ class PowerUpManager:
             power_up.update(game.game_speed, self.power_ups)
             if game.player.dino_rect.colliderect(power_up.rect):
                 power_up.start_time = pygame.time.get_ticks()
-                if power_up.type == HAMMER_TYPE:
-                    game.player.hammer = True
-                    game.player.shield = False
-                    game.player.slow = False
-                elif power_up.type == SHIELD_TYPE:
-                    game.player.shield = True
-                    game.player.hammer = False
-                    game.player.slow = False
-                elif power_up.type == HEART_TYPE:
-                    game.game_speed = 10
-                    game.player.slow = True 
-                    game.player.hammer = False
-                    game.player.shield = False
+                self.handle_power_up_collision(power_up, game, game.player)
+    
+    def handle_power_up_collision(self, power_up, game, player): # define the method within the class
+        power_up.start_time = pygame.time.get_ticks()
+        if power_up.type == HAMMER_TYPE:
+            player.hammer = True
+            player.shield = False
+            player.slow = False
+        elif power_up.type == SHIELD_TYPE:
+            player.shield = True
+            player.hammer = False
+            player.slow = False
+        elif power_up.type == HEART_TYPE:
+            game.game_speed = 20
+            player.slow = True 
+            player.hammer = False
+            player.shield = False
+        
+        player.has_power_up = True
+        player.type = power_up.type
+        player.power_up_time = power_up.start_time + (power_up.duration * 1000)
+        self.power_ups.remove(power_up)
 
-                game.player.has_power_up = True
-                game.player.type = power_up.type
-                game.player.power_up_time = power_up.start_time + (power_up.duration * 1000)
-                self.power_ups.remove(power_up)
-                
     def draw(self, screen):
         for power_up in self.power_ups:
             power_up.draw(screen)

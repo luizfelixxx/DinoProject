@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
-from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD, HAMMER_TYPE, RUNNING_HAMMER, DUCKING_HAMMER, JUMPING_HAMMER, HEART_TYPE
+from dino_runner.utils.constants import *
 
 X_POS = 80
 Y_POS = 310
@@ -35,7 +35,7 @@ class Dinosaur(Sprite):
         self.hammer = False
         self.slow = False
         self.show_text = False
-        self.shield_time_up = 0
+        self.power_time_up = 0
 
     def update(self, user_input):
         if self.dino_run:
@@ -51,6 +51,7 @@ class Dinosaur(Sprite):
             self.step_index = 0
         
         if user_input[pygame.K_UP] and not self.dino_jump:
+            JUMP_SOUND.play() #
             self.dino_jump = True
             self.dino_run = False
             self.dino_duck = False
@@ -62,7 +63,7 @@ class Dinosaur(Sprite):
             self.dino_duck = False
             self.dino_jump = False
             self.dino_run = True
-
+       
     def draw(self, screen):
         screen.blit(self.image,(self.dino_rect.x, self.dino_rect.y))
     
@@ -73,7 +74,7 @@ class Dinosaur(Sprite):
         self.dino_rect.y = Y_POS
         self.step_index += 1
 
-    def jump(self):
+    def jump(self): 
         self.image = JUMP_IMG[self.type]
         if self.dino_jump:
             self.dino_rect.y -= self.jump_vel * 4
